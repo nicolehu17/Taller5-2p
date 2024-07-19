@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <div class="container mt-3">
+    <h1>Servicios</h1>
+    
+    <form action="/servicios" method="get" class="mb-3">
+      <div class="input-group">
+        <input type="text" name="filter" class="form-control" placeholder="Filtrar" value="<%= filter %>">
+        <button class="btn btn-primary" type="submit">Filtrar</button>
+      </div>
+    </form>
+    
+    <a href="/servicios" class="btn btn-secondary mb-3">Listar Todo</a>
+
+    <table id="myTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID Cliente</th>
+          <th>Nombre Cliente</th>
+          <th>Apellido Cliente</th>
+          <th>ID Servicio</th>
+          <th>Descripción Servicio</th>
+          <th>Precio Servicio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(entry => { %>
+          <tr>
+            <td><%= entry.Cliente.id %></td>
+            <td><%= entry.Cliente.nombre %></td>
+            <td><%= entry.Cliente.apellido %></td>
+            <td><%= entry.Servicio.id %></td>
+            <td><%= entry.Servicio.Descripción %></td>
+            <td><%= entry.Servicio.precio %></td>
+          </tr>
+        <% }); %>
+      </tbody>      
+    </table>
+  </div>
+
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="/node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      $('#myTable').DataTable();
+    });
+  </script>
+  <%- include("partials/footer") %>
+</body>
+</html>
